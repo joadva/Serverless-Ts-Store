@@ -1,0 +1,16 @@
+##########################
+# copyright: Aplicaciones Creativas
+# description: Archivo de configuración para CodeBuild
+# author: Luis Miguel Alamilla 
+# creation: 03/03/2022
+##########################
+
+version: 0.1
+phases:
+  install:
+    commands:
+      - npm install -g serverless
+      - npm install --save
+  build:
+    commands:
+      - serverless deploy --region us-east-1

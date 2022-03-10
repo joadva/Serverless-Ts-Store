@@ -1,0 +1,101 @@
+all-loan:
+  handler: src/lambdas/loan/handler.all
+  name: ${self:service}-${self:provider.stage}-all-loan
+  description: Lambda que obtiene todos los prestamos
+  tags: ${self:custom.environment.LAMBDA_TAGS_LIST}
+  events:
+    - httpApi:
+        path: ${self:custom.api_prefix}/loan
+        method: GET
+        # request:
+        #   parameters:
+        #     paths:
+        #       systemId: true
+        # authorizer:
+        #   name: ${self:service}-${self:provider.stage}-Auth
+        #   arn: ${self:custom.environment.COGNITO_AUTHORIZER_ARN}
+  # vpc:
+  #   securityGroupIds: ${self:custom.environment.VPC_SEC_GROUP}
+  #   subnetIds: ${self:custom.environment.VPC_SUBNET_ID}
+
+get-by-id-loan:
+  handler: src/lambdas/loan/handler.getById
+  name: ${self:service}-${self:provider.stage}-get-by-id-loan
+  description: Lambda que obtiene un prestamo
+  tags: ${self:custom.environment.LAMBDA_TAGS_LIST}
+  events:
+    - httpApi:
+        path: ${self:custom.api_prefix}/loan/{id}
+        method: GET
+        # request:
+        #   parameters:
+        #     paths:
+        #       systemId: true
+        # authorizer:
+        #   name: ${self:service}-${self:provider.stage}-Auth
+        #   arn: ${self:custom.environment.COGNITO_AUTHORIZER_ARN}
+  # vpc:
+  #   securityGroupIds: ${self:custom.environment.VPC_SEC_GROUP}
+  #   subnetIds: ${self:custom.environment.VPC_SUBNET_ID}
+
+register-loan:
+  handler: src/lambdas/loan/handler.register
+  name: ${self:service}-${self:provider.stage}-register-loan
+  description: Lambda que crea un prestamo
+  tags: ${self:custom.environment.LAMBDA_TAGS_LIST}
+  events:
+    - httpApi:
+        path: ${self:custom.api_prefix}/loan
+        method: POST
+        # request:
+        #   parameters:
+        #     paths:
+        #       systemId: true
+        # authorizer:
+        #   name: ${self:service}-${self:provider.stage}-Auth
+        #   arn: ${self:custom.environment.COGNITO_AUTHORIZER_ARN}
+  # vpc:
+  #   securityGroupIds: ${self:custom.environment.VPC_SEC_GROUP}
+  #   subnetIds: ${self:custom.environment.VPC_SUBNET_ID}
+
+
+update-loan:
+  handler: src/lambdas/loan/handler.update
+  name: ${self:service}-${self:provider.stage}-update-loan
+  description: Lambda que edita un prestamo
+  tags: ${self:custom.environment.LAMBDA_TAGS_LIST}
+  events:
+    - httpApi:
+        path: ${self:custom.api_prefix}/loan/{id}
+        method: PUT
+        # request:
+        #   parameters:
+        #     paths:
+        #       systemId: true
+        # authorizer:
+        #   name: ${self:service}-${self:provider.stage}-Auth
+        #   arn: ${self:custom.environment.COGNITO_AUTHORIZER_ARN}
+  # vpc:
+  #   securityGroupIds: ${self:custom.environment.VPC_SEC_GROUP}
+  #   subnetIds: ${self:custom.environment.VPC_SUBNET_ID}
+
+
+delete-loan:
+  handler: src/lambdas/loan/handler.deleteLoan
+  name: ${self:service}-${self:provider.stage}-delete-loan
+  description: Lambda que eliminar logicamente un prestamo
+  tags: ${self:custom.environment.LAMBDA_TAGS_LIST}
+  events:
+    - httpApi:
+        path: ${self:custom.api_prefix}/loan/{id}
+        method: DELETE
+        # request:
+        #   parameters:
+        #     paths:
+        #       systemId: true
+        # authorizer:
+        #   name: ${self:service}-${self:provider.stage}-Auth
+        #   arn: ${self:custom.environment.COGNITO_AUTHORIZER_ARN}
+  # vpc:
+  #   securityGroupIds: ${self:custom.environment.VPC_SEC_GROUP}
+  #   subnetIds: ${self:custom.environment.VPC_SUBNET_ID}

@@ -1,0 +1,52 @@
+service: donfiado
+frameworkVersion: '3'
+
+package:
+  patterns:
+    - '!node_modules/**'
+    - '!./layer_donfiado/**'
+  individually: true
+
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  stage: dev
+  environment: ${file(env.yml):${self:custom.stage}}
+  logRetentionInDays: ${self:custom.environment.LOG_RETENTION_IN_DAYS}
+  layers:
+    # - arn:aws:lambda:us-east-1:667678494369:layer:layerCognito:7
+
+
+
+functions:
+  # Archivo de configuración
+  '${file(all.api.serverless.yml)}'
+          
+
+
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+
+
+# Variables custom para serverless
+custom:
+  # Etapa de proyecto
+  stage: '${opt:stage, self:provider.stage}'
+  # Obtiene las variables del archivo env.yml
+  environment: ${file(custom-env.yml):${self:custom.stage}, file(custom-env.yml):default}
+  # Prefijo para el path de los endpoints
+  api_prefix: /${self:custom.stage}/api/v1
+  # Configuración de plugin serverless split stack
+  # splitStacks:
+  #   # nestedStackCount: 4 # Controls the number of created nested stacks
+  #   perFunction: false
+  #   perType: true
+  #   perGroupFunction: false
+  # # Purga las versiones de la lambda para retener solo las últimas tres
+  # prune:
+  #   automatic: true
+  #   number: 3

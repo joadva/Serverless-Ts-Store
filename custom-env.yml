@@ -1,0 +1,31 @@
+# Variables que se heredan en todas las etapas
+default_env: &default_env # Días que se retiene el log en CloudWatch
+  LOG_RETENTION_IN_DAYS: 30
+# Dev stage
+dev:
+  <<: *default_env
+
+  # General timeout
+  LAMBDA_TIMEOUT: 30
+  # Tags de lambdas - Se agregan a todas las lambdas
+  LAMBDA_TAGS_LIST:
+    Enterprise: Aplicaciones Creativas 
+    Project: '${opt:stage, self:service}'
+    Area: IT-DevOps
+  # VPC
+  # Se requiere para poder acceder a la base de datos on premises
+  # Security group
+  # VPC_SEC_GROUP_1:
+  #   - sg-05787aa8892299e9e # puerto 9000
+  #   - sg-0a4121acca18472f9 # puerto 9001
+  # Subnet I
+  # VPC_SUBNET_ID_1:
+  #   - subnet-03ccfecf7592495df
+  #   - subnet-0b61cbbb5d8d912d6
+  #Cognito
+  # COGNITO_AUTHORIZER_ARN: arn:aws:cognito-idp:us-east-1:427784172992:userpool/us-east-1_LildFOeea
+  # COGNITO_USER_POOL_NAME: dev-sso-v2-cup
+  # ROLE_IAM: arn:aws:iam::427784172992:role/dev-sso-v2-custom-lambda-exec-role
+  #Configuracion de ApiGateway
+  # apiGateway_restApiId: aqgaejqic0
+  # apiGateway_restApiRootResourceId: gbhtihr5z6

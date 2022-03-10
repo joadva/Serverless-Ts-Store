@@ -1,0 +1,4 @@
+# Description: modulos de las lambdas
+#  lambdas
+- '${file(./src/lambdas/users/users.lambda.yml)}'
+- '${file(./src/lambdas/loan/loan.lambda.yml)}'

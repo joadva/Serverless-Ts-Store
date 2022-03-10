@@ -1,0 +1,39 @@
+all-user:
+  handler: src/lambdas/users/handler.all
+  name: ${self:service}-${self:provider.stage}-all-user
+  description: Lambda que obtiene todos los usuarios
+  tags: ${self:custom.environment.LAMBDA_TAGS_LIST}
+  events:
+    - httpApi:
+        path: ${self:custom.api_prefix}/users
+        method: GET
+        # request:
+        #   parameters:
+        #     paths:
+        #       systemId: true
+        # authorizer:
+        #   name: ${self:service}-${self:provider.stage}-Auth
+        #   arn: ${self:custom.environment.COGNITO_AUTHORIZER_ARN}
+  # vpc:
+  #   securityGroupIds: ${self:custom.environment.VPC_SEC_GROUP}
+  #   subnetIds: ${self:custom.environment.VPC_SUBNET_ID} 
+
+get-by-id-user:
+  handler: src/lambdas/users/handler.getById
+  name: ${self:service}-${self:provider.stage}-get-by-id-user
+  description: Lambda que obtiene un usuario
+  tags: ${self:custom.environment.LAMBDA_TAGS_LIST}
+  events:
+    - httpApi:
+        path: ${self:custom.api_prefix}/users/{id}
+        method: GET
+        # request:
+        #   parameters:
+        #     paths:
+        #       systemId: true
+        # authorizer:
+        #   name: ${self:service}-${self:provider.stage}-Auth
+        #   arn: ${self:custom.environment.COGNITO_AUTHORIZER_ARN}
+  # vpc:
+  #   securityGroupIds: ${self:custom.environment.VPC_SEC_GROUP}
+  #   subnetIds: ${self:custom.environment.VPC_SUBNET_ID} 

@@ -1,0 +1,13 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+env.yml
+.serverless/
+.build/
+layer_donfiado/node_package/node_modules
+layer_donfiado/node_package/package-lock.json
+layer_donfiado/.serverless
+package-lock.json
